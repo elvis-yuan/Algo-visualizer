@@ -6,21 +6,14 @@ import "./pathfinder.css";
 
 const Pathfinder = props => {
   const [grid, setGrid] = useState([]);
-  // const [isMouseDown, setMouseDown] = useState(false);
+  const [algoRunning, setRunning] = useState(true);
+  const [algoFinished, setFinished] = useState(true);
 
   const START_NODE = { row: 10, col: 9 };
   const FINISH_NODE = { row: 10, col: 40 };
 
   useEffect(() => {
-    const nodes = [];
-    for (let row = 0; row < 20; row++) {
-      let currentRow = [];
-      for (let col = 0; col < 50; col++) {
-        currentRow.push(createNode(row, col));
-      }
-      nodes.push(currentRow);
-    }
-    setGrid(nodes);
+    createGrid();
   }, []);
 
   // const changeStartLocation = (row, col) => {
@@ -46,32 +39,26 @@ const Pathfinder = props => {
     };
   };
 
-  // const createGrid = () => {
-  //   const nodes = [];
-  //   for (let row = 0; row < 20; row++) {
-  //     let currentRow = [];
-  //     for (let col = 0; col < 50; col++) {
-  //       currentRow.push(createNode(row, col));
-  //     }
-  //     nodes.push(currentRow);
-  //   }
-  //   setGrid(nodes);
-  // };
+  const createGrid = () => {
+    const nodes = [];
+    for (let row = 0; row < 20; row++) {
+      let currentRow = [];
+      for (let col = 0; col < 50; col++) {
+        currentRow.push(createNode(row, col));
+      }
+      nodes.push(currentRow);
+    }
+    setGrid(nodes);
+  };
 
-  // const resetGrid = () => {
-  //   setGrid([]);
-  //   const nodes = [];
-  //   for (let row = 0; row < 20; row++) {
-  //     let currentRow = [];
-  //     for (let col = 0; col < 50; col++) {
-  //       currentRow.push(createNode(row, col));
-  //     }
-  //     nodes.push(currentRow);
-  //   }
-  //   setGrid(nodes);
-  // };
+  const resetGrid = () => {
+    setGrid([]);
+    setRunning(true);
+    setTimeout(() => createGrid(), 0);
+  };
 
   const calculateDijkstra = () => {
+    setRunning(true);
     const startNode = grid[START_NODE.row][START_NODE.col];
     const finishNode = grid[FINISH_NODE.row][FINISH_NODE.col];
     const visitedNodePath = dijkstra(grid, startNode, finishNode);
@@ -98,6 +85,7 @@ const Pathfinder = props => {
     for (let i = 0; i < nodesShortestPath.length; i++) {
       const { row, col } = nodesShortestPath[i];
       document.getElementById(`${row}-${col}`).classList.add("shortest-path");
+      setRunning(false);
     }
   };
 
@@ -168,7 +156,7 @@ const Pathfinder = props => {
         </span>
       </div>
       <div className="grid">{renderRows}</div>
-      {/* <span onClick={resetGrid}>Reset</span> */}
+      {algoRunning ? null : <span onClick={resetGrid}>Reset</span>}
     </>
   );
 };

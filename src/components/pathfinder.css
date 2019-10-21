@@ -19,6 +19,7 @@
 
 .row {
   display: flex;
+  justify-content: center;
 }
 
 .start-node {
@@ -50,6 +51,7 @@
   border: 1px solid black;
   margin: 1px;
   padding: 1px;
+  box-sizing: border-box;
 }
 
 @keyframes visitedAnimation {
