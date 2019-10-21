@@ -4,17 +4,36 @@ import { dijkstra, shortestPath } from "../algorithms/dijkstra.js";
 
 import "./pathfinder.css";
 
-function Pathfinder(props) {
+const Pathfinder = props => {
   const [grid, setGrid] = useState([]);
+  // const [isMouseDown, setMouseDown] = useState(false);
 
   const START_NODE = { row: 10, col: 9 };
   const FINISH_NODE = { row: 10, col: 40 };
 
   useEffect(() => {
-    createGrid();
+    const nodes = [];
+    for (let row = 0; row < 20; row++) {
+      let currentRow = [];
+      for (let col = 0; col < 50; col++) {
+        currentRow.push(createNode(row, col));
+      }
+      nodes.push(currentRow);
+    }
+    setGrid(nodes);
   }, []);
 
-  function createNode(row, col) {
+  // const changeStartLocation = (row, col) => {
+  //   START_NODE.row = row;
+  //   START_NODE.col = col;
+  // };
+
+  // const changeFinishLocation = (row, col) => {
+  //   FINISH_NODE.row = row;
+  //   FINISH_NODE.col = col;
+  // };
+
+  const createNode = (row, col) => {
     return {
       col,
       row,
@@ -25,45 +44,85 @@ function Pathfinder(props) {
       isWall: false,
       previousNode: null
     };
-  }
+  };
 
-  function createGrid() {
-    const nodes = [];
-    for (let row = 0; row < 20; row++) {
-      let currentRow = [];
-      for (let col = 0; col < 50; col++) {
-        currentRow.push(createNode(row, col));
-      }
-      nodes.push(currentRow);
-    }
-    setGrid(nodes);
-  }
+  // const createGrid = () => {
+  //   const nodes = [];
+  //   for (let row = 0; row < 20; row++) {
+  //     let currentRow = [];
+  //     for (let col = 0; col < 50; col++) {
+  //       currentRow.push(createNode(row, col));
+  //     }
+  //     nodes.push(currentRow);
+  //   }
+  //   setGrid(nodes);
+  // };
 
-  function calculateDijkstra() {
+  // const resetGrid = () => {
+  //   setGrid([]);
+  //   const nodes = [];
+  //   for (let row = 0; row < 20; row++) {
+  //     let currentRow = [];
+  //     for (let col = 0; col < 50; col++) {
+  //       currentRow.push(createNode(row, col));
+  //     }
+  //     nodes.push(currentRow);
+  //   }
+  //   setGrid(nodes);
+  // };
+
+  const calculateDijkstra = () => {
     const startNode = grid[START_NODE.row][START_NODE.col];
     const finishNode = grid[FINISH_NODE.row][FINISH_NODE.col];
     const visitedNodePath = dijkstra(grid, startNode, finishNode);
     const nodesShortestPath = shortestPath(finishNode);
     animateDijkstra(visitedNodePath, nodesShortestPath);
-  }
+  };
 
-  function animateDijkstra(visitedNodePath, nodesShortestPath) {
+  const animateDijkstra = (visitedNodePath, nodesShortestPath) => {
     for (let i = 0; i <= visitedNodePath.length; i++) {
       if (i === visitedNodePath.length) {
-        animateShortestPath(nodesShortestPath);
+        setTimeout(() => {
+          animateShortestPath(nodesShortestPath);
+        }, 12 * i);
         return;
       }
-      const { row, col } = visitedNodePath[i];
-      document.getElementById(`${row}-${col}`).classList.add("visited-node");
+      setTimeout(() => {
+        const { row, col } = visitedNodePath[i];
+        document.getElementById(`${row}-${col}`).classList.add("visited-node");
+      }, 12 * i);
     }
-  }
+  };
 
-  function animateShortestPath(nodesShortestPath) {
+  const animateShortestPath = nodesShortestPath => {
     for (let i = 0; i < nodesShortestPath.length; i++) {
       const { row, col } = nodesShortestPath[i];
       document.getElementById(`${row}-${col}`).classList.add("shortest-path");
     }
-  }
+  };
+
+  // const handleMouseDown = (row, col, isStart, isFinish) => {
+  //   debugger;
+  //   if (isStart || isFinish) setMouseDown(true);
+  //   console.log("mouse is down");
+  // };
+
+  // const handleClick = () => {
+  //   console.log("testing");
+  // };
+
+  // const handleMouseUp = (row, col, isStart, isFinish) => {
+  //   if (isMouseDown) {
+  //     if (isStart) changeStartLocation(row, col);
+  //     if (isFinish) changeFinishLocation(row, col);
+  //     setMouseDown(false);
+  //   }
+  // };
+
+  // const handleMouseEnter = (row, col, isStart, isFinish) => {
+  //   if (isMouseDown) {
+  //   }
+  // };
 
   const Nodes =
     grid.length > 0
@@ -72,12 +131,19 @@ function Pathfinder(props) {
             const { row, col, isFinish, isStart, isWall } = node;
             return (
               <Node
+                // onClick={handleClick}
+                // onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
+                // onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
+                // onMouseEnter={() =>
+                //   handleMouseEnter(row, col, isStart, isFinish)
+                // }
                 key={nodeIdx}
                 row={row}
                 col={col}
                 isFinish={isFinish}
                 isStart={isStart}
                 isWall={isWall}
+                // isMouseDown={isMouseDown}
               />
             );
           });
@@ -96,10 +162,15 @@ function Pathfinder(props) {
 
   return (
     <>
-      <span onClick={calculateDijkstra}>Visualize Dijkstra's Algorithm</span>
+      <div className="nav-bar">
+        <span className="start-button" onClick={calculateDijkstra}>
+          Visualize Dijkstra's Algorithm
+        </span>
+      </div>
       <div className="grid">{renderRows}</div>
+      {/* <span onClick={resetGrid}>Reset</span> */}
     </>
   );
-}
+};
 
 export default Pathfinder;
