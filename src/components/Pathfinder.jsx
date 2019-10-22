@@ -7,31 +7,29 @@ import "./pathfinder.css";
 const Pathfinder = props => {
   const [grid, setGrid] = useState([]);
   const [algoRunning, setRunning] = useState(true);
-  const [algoFinished, setFinished] = useState(true);
+  const [isMouseDown, setMouseDown] = useState(false);
 
-  const START_NODE = { row: 10, col: 9 };
-  const FINISH_NODE = { row: 10, col: 40 };
+  const [StartNode, setStartNode] = useState({ row: 10, col: 9 });
+  const [FinishNode, setFinishNode] = useState({ row: 10, col: 40 });
 
   useEffect(() => {
     createGrid();
-  }, []);
+  });
 
-  // const changeStartLocation = (row, col) => {
-  //   START_NODE.row = row;
-  //   START_NODE.col = col;
-  // };
+  const changeStartLocation = (row, col) => {
+    setStartNode({ row, col });
+  };
 
-  // const changeFinishLocation = (row, col) => {
-  //   FINISH_NODE.row = row;
-  //   FINISH_NODE.col = col;
-  // };
+  const changeFinishLocation = (row, col) => {
+    setFinishNode({ row, col });
+  };
 
   const createNode = (row, col) => {
     return {
       col,
       row,
-      isStart: row === START_NODE.row && col === START_NODE.col,
-      isFinish: row === FINISH_NODE.row && col === FINISH_NODE.col,
+      isStart: row === StartNode.row && col === StartNode.col,
+      isFinish: row === FinishNode.row && col === FinishNode.col,
       distance: Infinity,
       visited: false,
       isWall: false,
@@ -59,8 +57,8 @@ const Pathfinder = props => {
 
   const calculateDijkstra = () => {
     setRunning(true);
-    const startNode = grid[START_NODE.row][START_NODE.col];
-    const finishNode = grid[FINISH_NODE.row][FINISH_NODE.col];
+    const startNode = grid[StartNode.row][StartNode.col];
+    const finishNode = grid[FinishNode.row][FinishNode.col];
     const visitedNodePath = dijkstra(grid, startNode, finishNode);
     const nodesShortestPath = shortestPath(finishNode);
     animateDijkstra(visitedNodePath, nodesShortestPath);
@@ -89,28 +87,22 @@ const Pathfinder = props => {
     }
   };
 
-  // const handleMouseDown = (row, col, isStart, isFinish) => {
-  //   debugger;
-  //   if (isStart || isFinish) setMouseDown(true);
-  //   console.log("mouse is down");
-  // };
+  const handleMouseDown = (row, col, isStart, isFinish) => {
+    // if (isStart || isFinish) setMouseDown(true);
+  };
 
-  // const handleClick = () => {
-  //   console.log("testing");
-  // };
+  const handleMouseUp = (row, col, isStart, isFinish) => {
+    // if (isMouseDown) {
+    //   if (isStart) changeStartLocation(row, col);
+    //   if (isFinish) changeFinishLocation(row, col);
+    //   setMouseDown(false);
+    // }
+  };
 
-  // const handleMouseUp = (row, col, isStart, isFinish) => {
-  //   if (isMouseDown) {
-  //     if (isStart) changeStartLocation(row, col);
-  //     if (isFinish) changeFinishLocation(row, col);
-  //     setMouseDown(false);
-  //   }
-  // };
-
-  // const handleMouseEnter = (row, col, isStart, isFinish) => {
-  //   if (isMouseDown) {
-  //   }
-  // };
+  const handleMouseEnter = (row, col, isStart, isFinish) => {
+    if (isMouseDown) {
+    }
+  };
 
   const Nodes =
     grid.length > 0
@@ -119,7 +111,6 @@ const Pathfinder = props => {
             const { row, col, isFinish, isStart, isWall } = node;
             return (
               <Node
-                // onClick={handleClick}
                 // onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
                 // onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
                 // onMouseEnter={() =>
@@ -131,7 +122,6 @@ const Pathfinder = props => {
                 isFinish={isFinish}
                 isStart={isStart}
                 isWall={isWall}
-                // isMouseDown={isMouseDown}
               />
             );
           });
