@@ -7,23 +7,24 @@ import "./pathfinder.css";
 const Pathfinder = props => {
   const [grid, setGrid] = useState([]);
   const [algoRunning, setRunning] = useState(true);
-  const [algoFinished, setFinished] = useState(true);
+  const [isMouseDown, setMouseDown] = useState(false);
 
-  const START_NODE = { row: 10, col: 9 };
-  const FINISH_NODE = { row: 10, col: 40 };
+  // const [StartNode, setStartNode] = useState({ row: 10, col: 9 });
+  // const [FinishNode, setFinishNode] = useState({ row: 10, col: 40 });
 
+  const START_NODE = { row: 10, col: 9 }
+  const FINISH_NODE = { row: 10, col: 40 }
+  
   useEffect(() => {
     createGrid();
-  }, []);
+  });
 
   // const changeStartLocation = (row, col) => {
-  //   START_NODE.row = row;
-  //   START_NODE.col = col;
+  //   setStartNode({ row, col });
   // };
 
   // const changeFinishLocation = (row, col) => {
-  //   FINISH_NODE.row = row;
-  //   FINISH_NODE.col = col;
+  //   setFinishNode({ row, col });
   // };
 
   const createNode = (row, col) => {
@@ -90,21 +91,15 @@ const Pathfinder = props => {
   };
 
   const handleMouseDown = (row, col, isStart, isFinish) => {
-    debugger;
-    if (isStart || isFinish) setMouseDown(true);
-    console.log("mouse is down");
+    // if (isStart || isFinish) setMouseDown(true);
   };
 
-  // const handleClick = () => {
-  //   console.log("testing");
-  // };
-
   const handleMouseUp = (row, col, isStart, isFinish) => {
-    if (isMouseDown) {
-      if (isStart) changeStartLocation(row, col);
-      if (isFinish) changeFinishLocation(row, col);
-      setMouseDown(false);
-    }
+    // if (isMouseDown) {
+    //   if (isStart) changeStartLocation(row, col);
+    //   if (isFinish) changeFinishLocation(row, col);
+    //   setMouseDown(false);
+    // }
   };
 
   const handleMouseEnter = (row, col, isStart, isFinish) => {
@@ -119,19 +114,17 @@ const Pathfinder = props => {
             const { row, col, isFinish, isStart, isWall } = node;
             return (
               <Node
-                // onClick={handleClick}
-                onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
-                onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
-                onMouseEnter={() =>
-                  handleMouseEnter(row, col, isStart, isFinish)
-                }
+                // onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
+                // onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
+                // onMouseEnter={() =>
+                //   handleMouseEnter(row, col, isStart, isFinish)
+                // }
                 key={nodeIdx}
                 row={row}
                 col={col}
                 isFinish={isFinish}
                 isStart={isStart}
                 isWall={isWall}
-                // isMouseDown={isMouseDown}
               />
             );
           });
