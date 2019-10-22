@@ -89,28 +89,28 @@ const Pathfinder = props => {
     }
   };
 
-  // const handleMouseDown = (row, col, isStart, isFinish) => {
-  //   debugger;
-  //   if (isStart || isFinish) setMouseDown(true);
-  //   console.log("mouse is down");
-  // };
+  const handleMouseDown = (row, col, isStart, isFinish) => {
+    debugger;
+    if (isStart || isFinish) setMouseDown(true);
+    console.log("mouse is down");
+  };
 
   // const handleClick = () => {
   //   console.log("testing");
   // };
 
-  // const handleMouseUp = (row, col, isStart, isFinish) => {
-  //   if (isMouseDown) {
-  //     if (isStart) changeStartLocation(row, col);
-  //     if (isFinish) changeFinishLocation(row, col);
-  //     setMouseDown(false);
-  //   }
-  // };
+  const handleMouseUp = (row, col, isStart, isFinish) => {
+    if (isMouseDown) {
+      if (isStart) changeStartLocation(row, col);
+      if (isFinish) changeFinishLocation(row, col);
+      setMouseDown(false);
+    }
+  };
 
-  // const handleMouseEnter = (row, col, isStart, isFinish) => {
-  //   if (isMouseDown) {
-  //   }
-  // };
+  const handleMouseEnter = (row, col, isStart, isFinish) => {
+    if (isMouseDown) {
+    }
+  };
 
   const Nodes =
     grid.length > 0
@@ -120,11 +120,11 @@ const Pathfinder = props => {
             return (
               <Node
                 // onClick={handleClick}
-                // onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
-                // onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
-                // onMouseEnter={() =>
-                //   handleMouseEnter(row, col, isStart, isFinish)
-                // }
+                onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
+                onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
+                onMouseEnter={() =>
+                  handleMouseEnter(row, col, isStart, isFinish)
+                }
                 key={nodeIdx}
                 row={row}
                 col={col}
