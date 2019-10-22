@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/Algo-visualizer/static/css/main.e7937a67.chunk.css",
-    "main.js": "/Algo-visualizer/static/js/main.1cc8016e.chunk.js",
-    "main.js.map": "/Algo-visualizer/static/js/main.1cc8016e.chunk.js.map",
+    "main.css": "/Algo-visualizer/static/css/main.0c314382.chunk.css",
+    "main.js": "/Algo-visualizer/static/js/main.1a9c02a0.chunk.js",
+    "main.js.map": "/Algo-visualizer/static/js/main.1a9c02a0.chunk.js.map",
     "runtime-main.js": "/Algo-visualizer/static/js/runtime-main.5985a5e2.js",
     "runtime-main.js.map": "/Algo-visualizer/static/js/runtime-main.5985a5e2.js.map",
-    "static/js/2.7a4d275e.chunk.js": "/Algo-visualizer/static/js/2.7a4d275e.chunk.js",
-    "static/js/2.7a4d275e.chunk.js.map": "/Algo-visualizer/static/js/2.7a4d275e.chunk.js.map",
+    "static/js/2.9076b90e.chunk.js": "/Algo-visualizer/static/js/2.9076b90e.chunk.js",
+    "static/js/2.9076b90e.chunk.js.map": "/Algo-visualizer/static/js/2.9076b90e.chunk.js.map",
     "index.html": "/Algo-visualizer/index.html",
-    "precache-manifest.2f771953c3b6ca69244ac9a76f7232f9.js": "/Algo-visualizer/precache-manifest.2f771953c3b6ca69244ac9a76f7232f9.js",
+    "precache-manifest.cc5a184e2fe920b72807cd7fe2bfdca3.js": "/Algo-visualizer/precache-manifest.cc5a184e2fe920b72807cd7fe2bfdca3.js",
     "service-worker.js": "/Algo-visualizer/service-worker.js",
-    "static/css/main.e7937a67.chunk.css.map": "/Algo-visualizer/static/css/main.e7937a67.chunk.css.map"
+    "static/css/main.0c314382.chunk.css.map": "/Algo-visualizer/static/css/main.0c314382.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.5985a5e2.js",
-    "static/js/2.7a4d275e.chunk.js",
-    "static/css/main.e7937a67.chunk.css",
-    "static/js/main.1cc8016e.chunk.js"
+    "static/js/2.9076b90e.chunk.js",
+    "static/css/main.0c314382.chunk.css",
+    "static/js/main.1a9c02a0.chunk.js"
   ]
 }
