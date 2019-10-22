@@ -7,24 +7,15 @@ import "./pathfinder.css";
 const Pathfinder = props => {
   const [grid, setGrid] = useState([]);
   const [algoRunning, setRunning] = useState(true);
-  const [algoFinished, setFinished] = useState(true);
+  const [algoFinished, setFinished] = useState(false);
+  const [isMouseDown, setMouseDown] = useState({node: null, isDown: false});
 
-  const START_NODE = { row: 10, col: 9 };
-  const FINISH_NODE = { row: 10, col: 40 };
+  const [START_NODE, setSTART_NODE] = useState({ row: 2, col: 9 });
+  const [FINISH_NODE, setFINISH_NODE] = useState({ row: 10, col: 40 });
 
   useEffect(() => {
     createGrid();
-  }, []);
-
-  // const changeStartLocation = (row, col) => {
-  //   START_NODE.row = row;
-  //   START_NODE.col = col;
-  // };
-
-  // const changeFinishLocation = (row, col) => {
-  //   FINISH_NODE.row = row;
-  //   FINISH_NODE.col = col;
-  // };
+  }, [START_NODE, FINISH_NODE]);
 
   const createNode = (row, col) => {
     return {
@@ -54,16 +45,20 @@ const Pathfinder = props => {
   const resetGrid = () => {
     setGrid([]);
     setRunning(true);
+    setFinished(false);
     setTimeout(() => createGrid(), 0);
   };
 
   const calculateDijkstra = () => {
-    setRunning(true);
-    const startNode = grid[START_NODE.row][START_NODE.col];
-    const finishNode = grid[FINISH_NODE.row][FINISH_NODE.col];
-    const visitedNodePath = dijkstra(grid, startNode, finishNode);
-    const nodesShortestPath = shortestPath(finishNode);
-    animateDijkstra(visitedNodePath, nodesShortestPath);
+    if(!algoFinished){
+      setRunning(true);
+      setFinished(true);
+      const startNode = grid[START_NODE.row][START_NODE.col];
+      const finishNode = grid[FINISH_NODE.row][FINISH_NODE.col];
+      const visitedNodePath = dijkstra(grid, startNode, finishNode);
+      const nodesShortestPath = shortestPath(finishNode);
+      animateDijkstra(visitedNodePath, nodesShortestPath);
+    }
   };
 
   const animateDijkstra = (visitedNodePath, nodesShortestPath) => {
@@ -89,23 +84,43 @@ const Pathfinder = props => {
     }
   };
 
-  // const handleMouseDown = (row, col, isStart, isFinish) => {
-  //   debugger;
-  //   if (isStart || isFinish) setMouseDown(true);
-  //   console.log("mouse is down");
-  // };
+  const handleMouseDown = (row, col, isStart, isFinish) => {
+    if(!algoFinished){
+      if (isStart) {
+        setMouseDown({node: "start", isDown: true });
+        grid[row][col].START_NODE = false;
+        };
+  
+      if(isFinish){
+        setMouseDown({node: 'finish', isDown: true});
+        console.log('node is Finish')
+      }
+    }
+    
+    
+  };
 
   // const handleClick = () => {
   //   console.log("testing");
   // };
 
-  // const handleMouseUp = (row, col, isStart, isFinish) => {
-  //   if (isMouseDown) {
-  //     if (isStart) changeStartLocation(row, col);
-  //     if (isFinish) changeFinishLocation(row, col);
-  //     setMouseDown(false);
-  //   }
-  // };
+  const handleMouseUp = (row, col) => {
+    if (isMouseDown.isDown) {
+      if (isMouseDown.node === 'start') {
+        // grid[row][col].START_NODE = true; 
+        setSTART_NODE({row, col});    
+        setMouseDown({node: null, isDown: false});
+        console.log(isMouseDown)
+      };
+      if (isMouseDown.node === 'finish') {
+        // grid[row][]
+        setFINISH_NODE({row,col})
+        setMouseDown({node: null, isDown: false});
+      };
+    //   if (isFinish) changeFinishLocation(row, col);
+    
+    }
+  };
 
   // const handleMouseEnter = (row, col, isStart, isFinish) => {
   //   if (isMouseDown) {
@@ -120,8 +135,8 @@ const Pathfinder = props => {
             return (
               <Node
                 // onClick={handleClick}
-                // onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
-                // onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
+                onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
+                onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
                 // onMouseEnter={() =>
                 //   handleMouseEnter(row, col, isStart, isFinish)
                 // }
