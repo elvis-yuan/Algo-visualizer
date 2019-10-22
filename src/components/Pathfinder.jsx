@@ -7,15 +7,37 @@ import "./pathfinder.css";
 const Pathfinder = props => {
   const [grid, setGrid] = useState([]);
   const [algoRunning, setRunning] = useState(true);
+<<<<<<< HEAD
   const [algoFinished, setFinished] = useState(false);
   const [isMouseDown, setMouseDown] = useState({node: null, isDown: false});
 
   const [START_NODE, setSTART_NODE] = useState({ row: 2, col: 9 });
   const [FINISH_NODE, setFINISH_NODE] = useState({ row: 10, col: 40 });
+=======
+  const [isMouseDown, setMouseDown] = useState(false);
 
+  // const [StartNode, setStartNode] = useState({ row: 10, col: 9 });
+  // const [FinishNode, setFinishNode] = useState({ row: 10, col: 40 });
+>>>>>>> changestartlocation
+
+  const START_NODE = { row: 10, col: 9 }
+  const FINISH_NODE = { row: 10, col: 40 }
+  
   useEffect(() => {
     createGrid();
+<<<<<<< HEAD
   }, [START_NODE, FINISH_NODE]);
+=======
+  });
+
+  // const changeStartLocation = (row, col) => {
+  //   setStartNode({ row, col });
+  // };
+
+  // const changeFinishLocation = (row, col) => {
+  //   setFinishNode({ row, col });
+  // };
+>>>>>>> changestartlocation
 
   const createNode = (row, col) => {
     return {
@@ -85,6 +107,7 @@ const Pathfinder = props => {
   };
 
   const handleMouseDown = (row, col, isStart, isFinish) => {
+<<<<<<< HEAD
     if(!algoFinished){
       if (isStart) {
         setMouseDown({node: "start", isDown: true });
@@ -120,12 +143,23 @@ const Pathfinder = props => {
     //   if (isFinish) changeFinishLocation(row, col);
     
     }
+=======
+    // if (isStart || isFinish) setMouseDown(true);
   };
 
-  // const handleMouseEnter = (row, col, isStart, isFinish) => {
-  //   if (isMouseDown) {
-  //   }
-  // };
+  const handleMouseUp = (row, col, isStart, isFinish) => {
+    // if (isMouseDown) {
+    //   if (isStart) changeStartLocation(row, col);
+    //   if (isFinish) changeFinishLocation(row, col);
+    //   setMouseDown(false);
+    // }
+>>>>>>> changestartlocation
+  };
+
+  const handleMouseEnter = (row, col, isStart, isFinish) => {
+    if (isMouseDown) {
+    }
+  };
 
   const Nodes =
     grid.length > 0
@@ -134,9 +168,14 @@ const Pathfinder = props => {
             const { row, col, isFinish, isStart, isWall } = node;
             return (
               <Node
+<<<<<<< HEAD
                 // onClick={handleClick}
                 onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
                 onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
+=======
+                // onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
+                // onMouseUp={() => handleMouseUp(row, col, isStart, isFinish)}
+>>>>>>> changestartlocation
                 // onMouseEnter={() =>
                 //   handleMouseEnter(row, col, isStart, isFinish)
                 // }
@@ -146,7 +185,6 @@ const Pathfinder = props => {
                 isFinish={isFinish}
                 isStart={isStart}
                 isWall={isWall}
-                // isMouseDown={isMouseDown}
               />
             );
           });
