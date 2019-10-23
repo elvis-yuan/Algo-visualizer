@@ -53,6 +53,10 @@ body {
   background-color: red;
 }
 
+.wall-node {
+  background-color: rgb(12, 53, 71);
+}
+
 .visited-node {
   animation-name: visitedAnimation;
   animation-duration: 1.5s;

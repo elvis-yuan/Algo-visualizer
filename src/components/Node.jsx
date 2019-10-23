@@ -8,17 +8,24 @@ function Node(props) {
     col,
     onMouseDown,
     onMouseUp,
-    onMouseEnter
+    onMouseEnter,
+    isWall
   } = props;
 
-  const nodeType = isFinish ? " finish-node" : isStart ? " start-node" : "";
+  const nodeType = isFinish
+    ? " finish-node"
+    : isStart
+    ? " start-node"
+    : isWall
+    ? " wall-node"
+    : "";
   const nodeIcon = isFinish ? (
     <span>
-      <i class="fas fa-flag"></i>
+      <i className="fas fa-flag"></i>
     </span>
   ) : isStart ? (
     <span>
-      <i class="fas fa-star"></i>
+      <i className="fas fa-star"></i>
     </span>
   ) : (
     ""

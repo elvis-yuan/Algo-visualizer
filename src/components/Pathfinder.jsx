@@ -84,36 +84,49 @@ const Pathfinder = props => {
     }
   };
 
-  const handleMouseDown = (row, col, isStart, isFinish) => {
+  const toggleWalls = (row, col) => {
+    const newGrid = grid.slice();
+    const node = grid[row][col];
+    const newNode = { ...node, isWall: !node.isWall };
+    newGrid[row][col] = newNode;
+    return newGrid;
+  };
+
+  const handleMouseDown = (row, col, isStart, isFinish, isWall) => {
     if (!algoFinished) {
       if (isStart) {
         setMouseDown({ node: "start", isDown: true });
-      }
-      if (isFinish) {
+      } else if (isFinish) {
         setMouseDown({ node: "finish", isDown: true });
+      } else {
+        const newGrid = toggleWalls(row, col);
+        setGrid(newGrid);
+        setMouseDown({ node: "wall", isDown: true });
       }
     }
   };
 
   const handleMouseUp = (row, col) => {
     if (isMouseDown.isDown) {
-      if (isMouseDown.node === "start") {
-        setSTART_NODE({ row, col });
-      }
-      if (isMouseDown.node === "finish") {
-        setFINISH_NODE({ row, col });
-      }
       setMouseDown({ node: null, isDown: false });
     }
   };
 
   const handleMouseEnter = (row, col) => {
     if (isMouseDown.isDown) {
-      if (isMouseDown.node === "start") {
-        setSTART_NODE({ row, col });
-      }
-      if (isMouseDown.node === "finish") {
-        setFINISH_NODE({ row, col });
+      switch (isMouseDown.node) {
+        case "start":
+          setSTART_NODE({ row, col });
+          break;
+        case "finish":
+          setFINISH_NODE({ row, col });
+          break;
+        case "wall":
+          const newGrid = toggleWalls(row, col);
+          setGrid(newGrid);
+          break;
+        default:
+          break;
       }
     }
   };
