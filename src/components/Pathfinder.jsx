@@ -8,11 +8,11 @@ const Pathfinder = props => {
   const [grid, setGrid] = useState([]);
   const [algoRunning, setRunning] = useState(true);
   const [algoFinished, setFinished] = useState(false);
-  const [isMouseDown, setMouseDown] = useState({node: null, isDown: false});
+  const [isMouseDown, setMouseDown] = useState({ node: null, isDown: false });
 
   const [START_NODE, setSTART_NODE] = useState({ row: 10, col: 9 });
   const [FINISH_NODE, setFINISH_NODE] = useState({ row: 10, col: 40 });
-  
+
   useEffect(() => {
     createGrid();
   }, [START_NODE, FINISH_NODE]);
@@ -50,7 +50,7 @@ const Pathfinder = props => {
   };
 
   const calculateDijkstra = () => {
-    if(!algoFinished){
+    if (!algoFinished) {
       setRunning(true);
       setFinished(true);
       const startNode = grid[START_NODE.row][START_NODE.col];
@@ -85,38 +85,38 @@ const Pathfinder = props => {
   };
 
   const handleMouseDown = (row, col, isStart, isFinish) => {
-    if(!algoFinished){
+    if (!algoFinished) {
       if (isStart) {
-        setMouseDown({node: "start", isDown: true });
-        };
-      if(isFinish){
-        setMouseDown({node: 'finish', isDown: true});
+        setMouseDown({ node: "start", isDown: true });
+      }
+      if (isFinish) {
+        setMouseDown({ node: "finish", isDown: true });
       }
     }
   };
 
   const handleMouseUp = (row, col) => {
     if (isMouseDown.isDown) {
-      if (isMouseDown.node === 'start') {
-        setSTART_NODE({row, col});    
-      };
-      if (isMouseDown.node === 'finish') {
-        setFINISH_NODE({row,col});
-      };
-      setMouseDown({node: null, isDown: false});
+      if (isMouseDown.node === "start") {
+        setSTART_NODE({ row, col });
+      }
+      if (isMouseDown.node === "finish") {
+        setFINISH_NODE({ row, col });
+      }
+      setMouseDown({ node: null, isDown: false });
     }
   };
 
-  // const handleMouseEnter = (row, col) => {
-  //   if (isMouseDown.isDown) {
-  //     if (isMouseDown.node === 'start') {
-  //       setSTART_NODE({row, col});    
-  //     }
-  //     if (isMouseDown.node === 'finish') {
-  //       setFINISH_NODE({row,col});
-  //     };
-  //   }
-  // };
+  const handleMouseEnter = (row, col) => {
+    if (isMouseDown.isDown) {
+      if (isMouseDown.node === "start") {
+        setSTART_NODE({ row, col });
+      }
+      if (isMouseDown.node === "finish") {
+        setFINISH_NODE({ row, col });
+      }
+    }
+  };
 
   const Nodes =
     grid.length > 0
@@ -127,9 +127,7 @@ const Pathfinder = props => {
               <Node
                 onMouseDown={() => handleMouseDown(row, col, isStart, isFinish)}
                 onMouseUp={() => handleMouseUp(row, col)}
-                // onMouseEnter={() =>
-                //   handleMouseEnter(row, col)
-                // }
+                onMouseEnter={() => handleMouseEnter(row, col)}
                 key={nodeIdx}
                 row={row}
                 col={col}
@@ -160,7 +158,11 @@ const Pathfinder = props => {
         </span>
       </div>
       <div className="grid">{renderRows}</div>
-      {algoRunning ? null : <span onClick={resetGrid}>Reset</span>}
+      {algoRunning ? null : (
+        <span className="reset-button" onClick={resetGrid}>
+          Reset
+        </span>
+      )}
     </>
   );
 };
