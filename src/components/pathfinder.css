@@ -83,6 +83,7 @@ body {
   margin: 1px;
   padding: 1px;
   box-sizing: border-box;
+  user-select: none;
 }
 
 @keyframes visitedAnimation {

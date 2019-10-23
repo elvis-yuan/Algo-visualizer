@@ -85,9 +85,12 @@ const Pathfinder = props => {
   };
 
   const toggleWalls = (row, col) => {
-    const newGrid = grid.slice();
     const node = grid[row][col];
-    const newNode = { ...node, isWall: !node.isWall };
+    const newGrid = grid.slice();
+    let newNode = { ...node };
+    if (!node.isStart && !node.isFinish) {
+      newNode.isWall = !node.isWall;
+    }
     newGrid[row][col] = newNode;
     return newGrid;
   };
@@ -107,9 +110,7 @@ const Pathfinder = props => {
   };
 
   const handleMouseUp = (row, col) => {
-    if (isMouseDown.isDown) {
-      setMouseDown({ node: null, isDown: false });
-    }
+    setMouseDown({ node: null, isDown: false });
   };
 
   const handleMouseEnter = (row, col) => {
