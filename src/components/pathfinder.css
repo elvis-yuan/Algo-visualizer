@@ -1,22 +1,37 @@
-.app {
-  height: 100vh;
-}
-
-#root {
-  height: 100vh;
-}
-
-body {
-  height: 100vh;
-}
-
 .nav-bar {
-  margin: 10px 0;
+  position: relative;
+  display: flex;
+  background-color: #005070;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.nav-header {
+  position: absolute;
+  left: 0;
+  margin-left: 10px;
+  color: white;
+  font-weight: 800;
+  font-size: 20px;
+  font-family: "EB Garamond", serif;
+}
+
+#footer {
+  background-color: #005070;
+  height: 40px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 .start-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
   border-radius: 5px;
-  background-color: rgb(0, 255, 179);
+  background-color: #5df218;
   padding: 5px;
   cursor: pointer;
 }
@@ -26,6 +41,8 @@ body {
 }
 
 .reset-button {
+  right: 25%;
+  position: absolute;
   border-radius: 5px;
   background-color: rgb(255, 251, 0);
   padding: 5px;
@@ -77,8 +94,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 25px;
-  width: 25px;
+  height: 22px;
+  width: 22px;
+  min-width: 5px;
+  min-height: 5px;
   border: 1px solid black;
   margin: 1px;
   padding: 1px;

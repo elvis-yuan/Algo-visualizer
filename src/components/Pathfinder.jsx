@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Node from "./Node";
 import { dijkstra, shortestPath } from "../algorithms/dijkstra.js";
+import Navbar from "./Navbar.jsx";
+import Footer from "./Footer.jsx";
 
 import "./pathfinder.css";
 
@@ -166,17 +168,13 @@ const Pathfinder = props => {
 
   return (
     <>
-      <div className="nav-bar">
-        <span className="start-button" onClick={calculateDijkstra}>
-          Visualize Dijkstra's Algorithm
-        </span>
-      </div>
+      <Navbar
+        calculateDijkstra={calculateDijkstra}
+        resetGrid={resetGrid}
+        algoRunning={algoRunning}
+      />
       <div className="grid">{renderRows}</div>
-      {algoRunning ? null : (
-        <span className="reset-button" onClick={resetGrid}>
-          Reset
-        </span>
-      )}
+      <Footer />
     </>
   );
 };
