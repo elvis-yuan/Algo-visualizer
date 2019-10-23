@@ -10,7 +10,20 @@ function Node(props) {
     onMouseUp,
     onMouseEnter
   } = props;
+
   const nodeType = isFinish ? " finish-node" : isStart ? " start-node" : "";
+  const nodeIcon = isFinish ? (
+    <span>
+      <i class="fas fa-flag"></i>
+    </span>
+  ) : isStart ? (
+    <span>
+      <i class="fas fa-star"></i>
+    </span>
+  ) : (
+    ""
+  );
+
   return (
     <div
       className={`node${nodeType}`}
@@ -20,7 +33,9 @@ function Node(props) {
       }
       onMouseUp={(row, col) => onMouseUp(row, col)}
       onMouseEnter={(row, col) => onMouseEnter(row, col)}
-    />
+    >
+      {nodeIcon}
+    </div>
   );
 }
 

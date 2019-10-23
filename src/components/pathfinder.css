@@ -69,8 +69,12 @@ body {
 } */
 
 .node {
-  height: 20px;
-  width: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  width: 25px;
   border: 1px solid black;
   margin: 1px;
   padding: 1px;
@@ -100,6 +104,7 @@ body {
 }
 
 .shortest-path {
+  color: black;
   animation-name: shortestPath;
   animation-duration: 1.5s;
   animation-timing-function: ease-out;
