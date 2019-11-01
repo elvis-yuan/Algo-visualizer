@@ -88,8 +88,8 @@ const Pathfinder = props => {
 
   const toggleWalls = (row, col) => {
     const node = grid[row][col];
-    const newGrid = grid.slice();
     let newNode = { ...node };
+    const newGrid = grid.slice();
     if (!node.isStart && !node.isFinish) {
       newNode.isWall = !node.isWall;
     }
@@ -136,7 +136,7 @@ const Pathfinder = props => {
 
   const Nodes =
     grid.length > 0
-      ? grid.map((row, rowIdx) => {
+      ? grid.map((row) => {
           return row.map((node, nodeIdx) => {
             const { row, col, isFinish, isStart, isWall } = node;
             return (
