@@ -1,5 +1,5 @@
 //start node has a distance of 0 all other nodes are set to infinity
-export function dijkstra(grid, startNode, finishNode) {
+export function bfs(grid, startNode, finishNode) {
     const visitedNodeOrder = [];
     startNode.distance = 0;
     const unvisitedNodes = getNodes(grid);
