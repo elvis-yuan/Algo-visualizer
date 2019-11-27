@@ -6,7 +6,7 @@ import Footer from "./Footer.jsx";
 
 import "./pathfinder.css";
 
-const Pathfinder = props => {
+const Pathfinder = () => {
   const [grid, setGrid] = useState([]);
   const [algoRunning, setRunning] = useState(true);
   const [algoFinished, setFinished] = useState(false);
@@ -136,7 +136,7 @@ const Pathfinder = props => {
 
   const Nodes =
     grid.length > 0
-      ? grid.map((row) => {
+      ? grid.map(row => {
           return row.map((node, nodeIdx) => {
             const { row, col, isFinish, isStart, isWall } = node;
             return (
