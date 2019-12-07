@@ -11,7 +11,6 @@ const Pathfinder = () => {
   const [algoRunning, setRunning] = useState(true);
   const [algoFinished, setFinished] = useState(false);
   const [isMouseDown, setMouseDown] = useState({ node: null, isDown: false });
-
   const [START_NODE, setSTART_NODE] = useState({ row: 10, col: 9 });
   const [FINISH_NODE, setFINISH_NODE] = useState({ row: 10, col: 40 });
 
